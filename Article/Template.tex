@@ -1,0 +1,206 @@
+\documentclass{amsart}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}\newcommand{\Q}{\mathbb Q}\newcommand{\Z}{\mathbb Z}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\De}{\Delta}
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+\begin{document}	
+	\title{A short review of "EIGENVECTORS FROM EIGENVALUES"}
+%	\author{\footnote{Email:\href{mailto:nbwzx@126.com}}
+	\date{}
+
+
+%    Information for first author
+\author{Zixing Wang$^*$}
+% Address of record for the research reported here
+
+
+\address{School of Mathematical Sciences, Shanghai Jiao Tong University,
+800 Dongchuan Road, 200240 Shanghai, China}
+%    Current address
+%\curraddr{}
+\email{nbwzx@126.com, }
+
+%    \thanks will become a 1st page footnote.
+%\thanks{Supported by NSFC under Grant No. 11771280 and 11671258, by NSF of Shanghai Municipal under Grant No. 17ZR1415400\\
+%\indent
+\thanks{ *\ Corresponding author}
+
+
+%    General info
+\subjclass[2000]{Primary 06F25; Secondary 20M25}
+
+\date{}
+
+\dedicatory{}
+
+
+\keywords{eigenvalue, eigenvector}
+
+\begin{abstract}
+
+
+In this paper, I will give an example and some comparisons between the new method and the original method to calculate the eigenvectors of a Hermitian matrix.
+
+\end{abstract}
+
+\maketitle
+
+
+    \section{Introduction}
+
+Recently, Peter B Denton, Stephen J Parke, Terence Tao, and Xining Zhang present a method of succinctly determining eigenvectors from eigenvalues in "EIGENVECTORS FROM EIGENVALUES". But I think this new method is more complicated than the original method. I will give a specific example to show why it is difficult to calculate.
+
+    \section{An example}
+Let A be a $n \times n $ Hermitian matrix with eigenvalues $\lambda _i \left(A \right)$ and normed eigenvectors $v_i$. The elements of each eigenvector are denoted $v_{i,j}$. Let $M_j$ be the
+$n-1 \times n-1 $ submatrix of A that results from deleting the $j^{th}$ column and the $j^{th}$ th
+row, with eigenvalues $\lambda _k\left( M_{j} \right)$.
+
+The new method showed that the norm squared of the elements of the eigenvectors are related to the
+eigenvalues and the submatrix eigenvalues:\\
+$$
+\left| v_{ij} \right|^2\prod_{k=1,k\ne i}^n{\left( \lambda _i\left( A \right) -\lambda _k\left( A \right) \right)}=\prod_{k=1}^n{\left( \lambda _i\left( A \right) -\lambda _k\left( M_{j} \right) \right)}
+$$
+
+We take a specific matrix and try to calculate the eigenvectors by the formula in this paper.
+
+For example, for the Hermitian matrix
+$
+A=\left( \begin{matrix}
+	1&		2&		3&		0\\
+	2&		1&		2&		3\\
+	3&		2&		1&		2\\
+	0&		3&		2&		1\\
+\end{matrix} \right) 
+$
+
+By calculating, we have
+$
+\lambda _1\left( A \right) =2+\sqrt{26},\lambda _2\left( A \right) =\sqrt{2},\lambda _3\left( A \right) =-\sqrt{2},\lambda _4\left( A \right) =2-\sqrt{26}
+$
+
+$
+M_{1}=\left( \begin{matrix}
+	1&		2&		3\\
+	2&		1&		2\\
+	3&		2&		1\\
+\end{matrix} \right),
+\lambda _1\left( M_{1} \right) =\frac{5+\sqrt{41}}{2},\lambda _2\left( M_{1} \right) =\frac{5-\sqrt{41}}{2},\lambda _3\left( M_{1} \right) =-2
+$
+
+
+$
+M_{2}=\left( \begin{matrix}
+	1&		3&		0\\
+	3&		1&		2\\
+	0&		2&		1\\
+\end{matrix} \right) ,
+\lambda _1\left( M_{2} \right) =1+\sqrt{13},\lambda _2\left( M_{2} \right) =1,\lambda _3\left( M_{2} \right) =1-\sqrt{13}
+$
+
+$
+M_{3}=\left( \begin{matrix}
+	1&		2&		0\\
+	2&		1&		3\\
+	0&		3&		1\\
+\end{matrix} \right) ,
+\lambda _1\left( M_{3} \right) =1+\sqrt{13},\lambda _2\left( M_{3} \right) =1,\lambda _3\left( M_{3} \right) =1-\sqrt{13}
+$
+
+$
+M_{4}=\left( \begin{matrix}
+	1&		2&		3\\
+	2&		1&		2\\
+	3&		2&		1\\
+\end{matrix} \right) ,
+\lambda _1\left( M_{4} \right) =\frac{5+\sqrt{41}}{2},\lambda _2\left( M_{4} \right) =\frac{5-\sqrt{41}}{2},\lambda _3\left( M_{4} \right) =-2
+$
+
+So
+$$
+\left| v_{11} \right|=\sqrt{\frac{\left( \lambda _1\left( A \right) -\lambda _1\left( M_1 \right) \right) \left( \lambda _1\left( A \right) -\lambda _2\left( M_1 \right) \right) \left( \lambda _1\left( A \right) -\lambda _3\left( M_1 \right) \right)}{\left( \lambda _1\left( A \right) -\lambda _2\left( A \right) \right) \left( \lambda _1\left( A \right) -\lambda _3\left( A \right) \right) \left( \lambda _1\left( A \right) -\lambda _4\left( A \right) \right)}}=\sqrt{\frac{26-\sqrt{26}}{104}}
+$$
+Simlarly, we can get
+$\left| v_{12} \right|=\sqrt{\frac{26+\sqrt{26}}{104}}$, 
+$\left| v_{13} \right|=\sqrt{\frac{26+\sqrt{26}}{104}}$, 
+$\left| v_{14} \right|=\sqrt{\frac{26-\sqrt{26}}{104}}$, \\
+$\left| v_{21} \right|=\sqrt{\frac{26+13\sqrt{2}}{104}}$, 
+$\left| v_{21} \right|=\sqrt{\frac{26-13\sqrt{2}}{104}}$, 
+$\left| v_{23} \right|=\sqrt{\frac{26-13\sqrt{2}}{104}}$,  
+$\left| v_{24} \right|=\sqrt{\frac{26+13\sqrt{2}}{104}}$, \\
+$\left| v_{31} \right|=\sqrt{\frac{26+13\sqrt{2}}{104}}$, 
+$\left| v_{32} \right|=\sqrt{\frac{26-13\sqrt{2}}{104}}$, 
+$\left| v_{33} \right|=\sqrt{\frac{26-13\sqrt{2}}{104}}$, 
+$\left| v_{34} \right|=\sqrt{\frac{26+13\sqrt{2}}{104}}$,  \\
+$\left| v_{41} \right|=\sqrt{\frac{26+\sqrt{26}}{104}}$, 
+$\left| v_{42} \right|=\sqrt{\frac{26-\sqrt{26}}{104}}$, 
+$\left| v_{43} \right|=\sqrt{\frac{26-\sqrt{26}}{104}}$, 
+$\left| v_{44} \right|=\sqrt{\frac{26+\sqrt{26}}{104}}$.   \\
+
+Here, $A$ a real symmetric matrix. So by "the eigenvectors of the different eigenvalues of the real symmetric matrix can be all real vectors" and "the eigenvectors of the different eigenvalues of the Hermite matrix are orthogonal", we can know whether $v_{ij}$ is positive or negative.
+
+By testing the sign for -1 and 1, we finally know that \\
+$v_{1}=\left( -\sqrt{\frac{26+\sqrt{26}}{104}},-\sqrt{\frac{26+\sqrt{26}}{104}},-\sqrt{\frac{26+\sqrt{26}}{104}}, -\sqrt{\frac{26-\sqrt{26}}{104}}\right)$, \\
+$v_{2}=\left( -\sqrt{\frac{26+13\sqrt{2}}{104}},\sqrt{\frac{26-13\sqrt{2}}{104}},-\sqrt{\frac{26-13\sqrt{2}}{104}},\sqrt{\frac{26+13\sqrt{2}}{104}}\right)$, \\
+$v_{3}=\left( \sqrt{\frac{26+13\sqrt{2}}{104}},\sqrt{\frac{26-13\sqrt{2}}{104}},-\sqrt{\frac{26-13\sqrt{2}}{104}},-\sqrt{\frac{26+13\sqrt{2}}{104}}\right)$,  \\
+$v_{4}=\left( -\sqrt{\frac{26+\sqrt{26}}{104}},\sqrt{\frac{26-\sqrt{26}}{104}},\sqrt{\frac{26-\sqrt{26}}{104}},-\sqrt{\frac{26+\sqrt{26}}{104}}\right)$.   \\
+
+\section{Conclusion}
+In "EIGENVECTORS FROM EIGENVALUES", they wrote that"The form of Lemma 2 with the norm squared of the elements of the eigenvectors is expected in that any determination of the eigenvectors from the
+eigenvalues is insensitive to the phases since one can multiply any eigenvector by a
+phase $e^{i\theta}$ while leaving $ A, M_{j}$ , and the eigenvalues unchanged."
+
+For the real symmetric matrix, just like the example, we can know whether $v_{ij}$ is positive or negative by testing. However, for the general Hermitian matrix, the phases lack a good way to determine.
+
+If you use this new method to calculate the eigenvectors of a real symmetric matrix, then you need to follow these steps:\\
+1.Calculate $n$ eigenvalues of the original matrix. $($the time complexity is $O\left(n^{3}\right))$\\
+2.Calculate $n-1$ eigenvalues of $n$ sub-matrix. $($the time complexity is $O\left(n^{4}\right))$\\ 
+3.Determine the sign $($the time complexity is more than $O\left(n^{3}\right))$
+
+However, the traditional method only requires two steps: \\
+1.Find its corresponding eigenvalue $($the time complexity is $O\left(n^{3}\right))$; \\
+2.Solve the homogeneous linear equations $($the time complexity is $O\left(n^{3}\right))$.
+
+What's more, Tao wrote in his blog: numerical problems will arise if the Hermitian matrix (or a particular submatrix of it) has coincident (or nearly-coincident) eigenvalues.
+
+ So all in all, the new method has a huge amount of calculations and is limited in many aspects.
+
+	\begin{thebibliography}{1}	
+	\bibitem{J}
+	Peter B Denton, Stephen J Parke, Terence Tao, Xining Zhang, EIGENVECTORS FROM EIGENVALUES
+	\end{thebibliography}
+
+
+	\end{document}
