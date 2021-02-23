@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.2.25)  10 NOV 2020 18:26
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/W32TeX) (preloaded format=xelatex 2020.2.25)  21 NOV 2020 10:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1309,7 +1309,7 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 LaTeX Warning: Unused global option(s):
     [10.5pt].
 
-No file Template.aux.
+(./Template.aux)
 \openout1 = `Template.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
@@ -1328,7 +1328,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
 LaTeX Font Info:    ... okay on input line 25.
-ABD: EverySelectfont initializing macros
+ ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 25.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
@@ -1580,18 +1580,15 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 110 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 33394 strings out of 492922
- 742665 string characters out of 6131735
- 762340 words of memory out of 5000000
+ 33396 strings out of 492922
+ 742691 string characters out of 6131735
+ 762348 words of memory out of 5000000
  36847 multiletter control sequences out of 15000+600000
  554500 words of font info for 181 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

@@ -1,29 +1,43 @@
 \documentclass[12pt]{article}
-
-\usepackage{geometry}
-\usepackage{fancyhdr}
-\usepackage{pifont}
-\usepackage{graphicx}
-\usepackage{mathrsfs}
-
-\usepackage{fancyhdr}
-\usepackage{extramarks}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amsfonts}
-\usepackage{tikz}
-\usepackage[plain]{algorithm}
-\usepackage{algpseudocode}
-\usepackage{ctex}
-
-
-\CTEXoptions[today=old]
-
-\usetikzlibrary{automata,positioning}
+\def\filedate{2021/2/23}
+\usepackage{geometry}  %Set the size of each part of the page
+\usepackage{fancyhdr}  %Set header, margin and footer
+\usepackage{pifont}  %Special symbol font
+\usepackage{graphicx}  %For illustration
+\usepackage{ctex} %for Chinese
+\usepackage{placeins} %\FloatBarries
+\usepackage{extramarks}  %extra marks
+\usepackage{mathrsfs} %Mathematical font
+\usepackage{mathtools} %Mathematical tools
+\usepackage{amsmath}  %Mathematical formula
+\usepackage{amssymb}  %Mathematical fonts and symbols
+\usepackage{amsthm} %Mathematical theorem format control
+\usepackage{tikz} %Draw
+\usepackage{algorithm} %algorithm
+\usepackage{algpseudocode} %algpseudo code
+\usepackage{tabularx} %Automatic calculation of column width
+\usepackage{setspace} %Set space
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode} %Insert code
+\usepackage{paralist} %Reduce the gap for itemize and enditemize
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+\renewcommand{\proofname}{\bf Proof}
+\renewcommand{\thesection}{}
+\let\itemize\compactitem 
+\let\enditemize\endcompactitem 
+\let\enumerate\compactenum 
+\let\endenumerate\endcompactenum 
+\let\description\compactdesc 
+\let\enddescription\endcompactdesc
+  \theoremstyle{plain}% default
 
 %
 % Basic Document Settings
 %
+
+\CTEXoptions[today=old]
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -69,6 +83,7 @@
 
 \newenvironment{homeworkProblem}{
     \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{section}{\arabic{homeworkProblemCounter}}
     \setcounter{partCounter}{1}
     \enterProblemHeader{homeworkProblemCounter}
 }{
@@ -80,16 +95,16 @@
 %   - Title
 %   - Due date
 %   - Class
-%   - Section/Time
+%   - StudentID
 %   - Instructor
 %   - Author
 %
 
-\newcommand{\hmwkTitle}{Homework\ \#23}
+\newcommand{\hmwkTitle}{Homework\ \#1}
 \newcommand{\hmwkDueDate}{\today}
-\newcommand{\hmwkClass}{Abstract algebra}
-\newcommand{\hmwkClassTime}{Student Number: 518070910121}
-\newcommand{\hmwkClassInstructor}{Professor Pu Zhang}
+\newcommand{\hmwkClass}{Time Series Analysis}
+\newcommand{\hmwkStudentID}{Student Number: 518070910121}
+\newcommand{\hmwkClassInstructor}{Professor Shan Luo}
 \newcommand{\hmwkAuthorName}{Zixing Wang}
 
 %
@@ -97,197 +112,124 @@
 %
 
 \title{
-    \vspace{2in}
+    \vspace{0.5in}
     \textmd{\textbf{\hmwkClass: \hmwkTitle}}\\
     \normalsize\vspace{0.1in}\small{Finished\ on\ \hmwkDueDate\ }\\
    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
-    \vspace{1in}
+    \vspace{3in}
+\FloatBarrier
 \begin{figure}[htb] 
- \center{\includegraphics[width=5cm]  {DNA.png}} 
- \end{figure}
+\center{\includegraphics[width=5cm]  {DNA.png}} 
+\end{figure}
+ \FloatBarrier
+ \author{\textbf{\hmwkAuthorName}}
+\date{\hmwkStudentID}
 }
 
-\author{\textbf{\hmwkAuthorName}}
-\date{\hmwkClassTime}
-
-\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
 %
 % Various Helper Commands
 %
 
-% Useful for algorithms
-\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
-
-% For derivatives
-\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
-
-% For partial derivatives
-\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
-
-% Integral dx
-\newcommand{\dx}{\mathrm{d}x}
-
 % Alias for the Solution section header
-\newcommand{\solution}{\textbf{\large Solution}}
+\newcommand{\solution}{\par   \noindent   \textbf{Solution}\\ \indent}
 
-% Probability commands: Expectation, Variance, Covariance, Bias
+% Probability commands: Expectation, Variance, Covariance, Bias and so on.
 \newcommand{\E}{\mathrm{E}}
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+\newcommand{\dx}{\mathrm{d}x}
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+\newcommand{\pic}[2]{
+\FloatBarrier
+\begin{figure}[htb] 
+\center{\includegraphics[width=#2]  {#1}} 
+\end{figure}
+\FloatBarrier
+}
 
 \begin{document}
-
+\lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
 \maketitle
 \pagebreak
-
+ 
 \begin{homeworkProblem}
-1.试构作一个8元域，并写出它的加法表和乘法表
-    \par   \noindent   \textbf{Solution}\\
-\indent 
-$8=2^3$,设F是8元域，则$F$的素域是$\mathbb{Z}_2$，$[F:\mathbb{Z}_2]=3$，找一个$\mathbb{Z}_2$上的3次不可约多项式，比如$f(x)=x^3+x+1$，设$u$是它的一个根，那么$\mathbb{Z}_2(u)$就是一个8元域。
+1.3 附录B中的 B6 是 1973 至 1978 年美国在意外事故中的死亡人数.
+\FloatBarrier
+\renewcommand\arraystretch{1.5}
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+年份   & 1月   & 2月   & 3月   & 4月   & 5月    & 6月    & 7月    & 8月    & 9月   & 10月  & 11月  & 12月  \\ \hline
+1973 & 9007 & 8106 & 8928 & 9137 & 10017 & 10826 & 11317 & 10744 & 9713 & 9938 & 9161 & 8927 \\ \hline
+1974 & 7750 & 6981 & 8038 & 8422 & 8714  & 9512  & 10120 & 9823  & 8743 & 9192 & 8710 & 8680 \\ \hline
+1975 & 8162 & 7306 & 8124 & 7870 & 9387  & 9556  & 10093 & 9620  & 8285 & 8433 & 8160 & 8034 \\ \hline
+1976 & 7717 & 7461 & 7776 & 7925 & 8634  & 8945  & 10078 & 9179  & 8037 & 8488 & 7874 & 8647 \\ \hline
+1977 & 7792 & 6957 & 7726 & 8106 & 8890  & 9299  & 10625 & 9302  & 8314 & 8850 & 8265 & 8796 \\ \hline
+1978 & 7836 & 6892 & 7791 & 8129 & 9115  & 9434  & 10484 & 9827  & 9110 & 9070 & 8633 & 9240 \\ \hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+利用至少两种方法对该时间序列进行分解.要求如下:
+\begin{itemize}
+\item[(1)] 画出数据图,给出数据的周期 $T$;
+\item[(2)] 给出趋势项、周期项和随机项的计算公式;
+\item[(3)] 画出趋势项、周期项和随机项的数据图;
+\item[(4)] 对 1979 年的意外死亡人数做出预测.
+\end{itemize}
+\solution
+首先介绍一个引理。
+\begin{lemma}[Size Of Left Coset]
+Let $H$ be a finite subgroup of a group $G$.  Then each left
+coset of $H$ in $G$ has the same number of elements as $H$.
+\end{lemma}
 
-那么计算可得该8元域的元素满足
+\begin{theorem}[Lagrange's Theorem]
+Let $G$ be a finite group, and let $H$ be a subgroup
+of $G$.  Then the order of $H$ divides the order of $G$.
+\end{theorem}
 
-$
-\begin{aligned}
-&0=0\\
-&u=u\\
-&u^2=u^2\\
-&u+1=u^3\\
-&u^2+u=u^4\\
-&u^2+u+1=u^5\\
-&u^2+1=u^6\\
-&1=u^7
-\end{aligned}
-$
+\begin{proof}
+Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and $z = yb$ for some $b \in H$. If $h$ is any element of $H$ then $ah \in H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$. But $zh = x(ah)$ and $xh = z(a^{-1}h)$ for all $h \in H$. Therefore $zH \subset xH$ and $xH \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as required.
+\end{proof}
 
-这些式子给出了乘法的法则。
+\lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
+\begin{lstlisting}[language=R]
+death.month<- array(0, c(72))
+death.detrended<-death.people-death.trended
+ymat <- matrix(c(death.detrended), byrow=TRUE, ncol=12)
+death.avg <- apply(ymat, 2, mean, na.rm=TRUE)
+for  (i in 1:72) {
+death.month[i]<-death.avg[(i-1)%%12+1]
+}
+\end{lstlisting}
 
-加法只需要各个系数按照$\mathbb{Z}_2$的加法方式相加即可。
+\pic{fig1.png}{10cm}
 
-加法表：
-\begin{figure}[htb] 
- \center{\includegraphics[width=10cm]  {fig1.png}} 
- \end{figure}
+%\lstinputlisting[language=Python]{D:/python/program/active.py}
 
-乘法表：
-\begin{figure}[htb] 
- \center{\includegraphics[width=10cm]  {fig2.png}} 
- \end{figure}
+对于房价的预测而言，url, id, Cid, DOM, followers是没有用的信息。对上述量进行删除处理。
+\lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
+\begin{lstlisting}[language=python]
+df = df.drop(['url', 'id', 'Cid', 'DOM', 'followers'], axis = 1)
+\end{lstlisting}
+\end{homeworkProblem}
+\pagebreak
+  
+\begin{homeworkProblem}
+5.38. Show that if $X$ and $Y$ are regular, then so is the product space $X \times Y .$ Conclude that $\mathbb{R}^{n}$ is regular.
+\solution
+1. For any point $(x, y) \in X \times Y$, it's the product of two closed sets in $X$ and $Y$, so it's closed. 
+
+2. For any point $(x, y) \in X \times Y$ and any closed set $C=U \times V,$ where $U$ is closed in $X$ and $V$ is closed in $Y$ and $x \notin U$ and $y \notin V$. $X$ and $Y$ are regular, so for $x$ and $U,$ we have there exists open sets $A_{1}$ and $A_{2}$ such that $x \in A_{1}$ and $U \subset A_{2}$ and $A_{1} \cap A_{2}=\varnothing$. Similarly, for $y$ and $V$, we have there exists open sets $B_{1}$ and $B_{2}$ such that $y \in B_{1}$ and $V \subset B_{2}$ and $B_{1} \cap B_{2}=\varnothing$.
+Then we know that $(x, y) \in A_{1} \times B_{1}$ and $C \subset A_{2} \times B_{2},$ where $A_{1} \times B_{1}$ and $A_{2} \times B_{2}$ are open, and $\left(A_{1} \times B_{1}\right) \cap\left(A_{2} \times B_{2}\right)=\varnothing$.
+
+$\mathbb{R}$ is regular, so use this conclusion n times, we know that $\mathbb{R}^{n}$ is regular.
 \end{homeworkProblem}
 \pagebreak
 
-\begin{homeworkProblem}
-3. 设 F 为 $p^{n}$ 元域( $p$ 为素数) $, F=F_{p}(u) .$ 试问 $u$ 是否一定为乘法循环群$F^{*}=F-\{0\}$ 的生成元?
-    \par   \noindent   \textbf{Solution}\\
-\indent
-不一定的。
-
-$x^2+1$在$\mathbb{Z}_3[x]$中是不可约多项式。令$u$是方程$x^2+1\in\mathbb{Z}_3[x]$的一个根，因为$u^4=(u^2)^2=2^2=1$，所以在$\mathbb{Z}_3(u)$中$u$不是乘法循环群的生成元。
-\end{homeworkProblem}
-\pagebreak
-
-\begin{homeworkProblem}
-4. 设 $f(x)$ 是 $F_{p}[x]$ 中首 1 不可约多项式.
-
-(1) 若 $u$ 为 $f(x)$ 的一个根,则 $f(x)$ 共有 $n$ 个彼此不同的根,并且它们为 $u, u^{p}, u^{p^{2}}, \cdots, u^{p^{n-1}}$
-
-(2) 若 $f(x)$ 的一个根 $u$ 为域 $F=F_{p}(u)$ 的乘法循环群 $F^{*}=F-\{0\}$ 的生成元,则 $f(x)$ 的每个根也都是 $F^{*}$ 的生成元
-
-(3)证明 $F_{p}[x]$ 中 $n$ 次本原多项式共有 $\varphi\left(p^{n}-1\right) / n$ 个,其中 $\varphi(n)$ 是欧拉函数，表示从 $1$ 到 $n$ 的正整数中与 $n$ 互素的正整数个数。
-    \par   \noindent   \textbf{Solution}\\
-\indent
-(1) 根据有限域的结构定理知 $F_{p}$ 中元 $a$ 均满足 $a^{p}=a,$ 
-
-从而对任一正整数 $t (1 \leq t \leq n-1)$ 均有 $a^{p^{t}}=a$，于是$f\left(u^{p^{t}}\right)=(f(u))^{p^{t}}=0$，
-
-即 $u, u^{p}, \cdots, u^{p^{n-1}}$ 均是 $f(x)$ 的根.
-
-假设存在 $u^{p^{i}}=u^{p^{j}} (1 \leq i<j \leq n-1)$ , 那么 $\left(u^{p^{j-i}}-u\right)^{p^{i}}=u^{p^{j}}-u^{p^{i}}=0,$ 那么 $u^{p^{j-i}-1}=1,$ 于是$F_{p}(u)$ 是 $p^{j-i}$ 元域的子域. 但 $F_{p}(u)$ 是 $p^{n}$ 元域. 这导致了矛盾.
-
-从而假设不成立，因此这些根两两不同。
-
-(2) 若 $u$ 是 $F_{p}(u)$ 的乘法群的生成元, 则 $u$ 的乘法阶为 $p^{n}-1 .$ 因为 $p^{t}(1 \leq t \leq n-1)$ 与 $p^{n}-1$ 互素, 故 $u^{p}, \cdots, u^{p^{n-1}}$ 均为 $p^{n}-1$ 阶元, 从而均是循环群 $F_{p}^{*}(u)$ 的生成元, 即 $f(x)$ 的任一根均是 $F_{p}^{*}(u)$ 的生成元.
-
-(3)我们采用“算两次”的方法来证明。 
-
-设 $F_{p}[x]$ 中共有 $t$ 个 $n$ 次本原多项式, 它们均为多项式 $x^{p^{n}}-x$ 的因子. 设 $E$ 是 $x^{p^{n}}-x$ 所有的根作成的 $p^{n}$ 元域, 则 $E$ 的乘法循环群 $E^{*}$ 有 $\varphi\left(p^{n}-1\right)$ 个 生成元. 
-
-由 (2) 知 $F_{p}[x]$ 中每个 $n$ 次本原多项式的所有根均为 $E^{*}$ 的生成元. 而
-$E^{*}$ 的任一生成元均是 $F_{p}[x]$ 中某一个 $n$ 次本原多项式的一个根, 因为两个不同的 $n$ 次本原多项式互素, 所以没有相同的根, 从而 $E^{*}$ 共有 $n t$ 个生成元.
-
-所以$nt=\varphi\left(p^{n}-1\right)$，我们得到 $F_{p}[x]$ 中 $n$ 次本原多项式共有 $\varphi\left(p^{n}-1\right) / n$ 个.
-\end{homeworkProblem}
-\pagebreak
-
-\begin{homeworkProblem}
-7. 设 $K$ 是有限域. 求证 : 对每个 $n \geq 1, K[x]$ 中必存在 $n$ 次不可约多项式.
-    \par   \noindent   \textbf{Solution}\\
-\indent
-设这个有限域 $K$ 是 $p^n$ 元域，特征数是$p$。设$F$是$K$所含的素域，则$K$是$F$的$k$次扩域，即$[K:F]=k$.
-
-作$K[x]$中的多项式$x^{p^{kn}}-x$在$K$上的分裂域$E$, 那么$E$恰好由$x^{p^{kn}}-x$的两两互异的$p^{kn}$个根组成.
-
-$F\subset K \subset E$，且$E$是$F$的有限扩域，且$[E:F]=kn$，所以根据望远镜公式$[E:K]=n$.
-
-因为有限域$E$是素域$F$的一个单扩域，所以存在$E$中的元素$u$，使得$E=F(u)$，那么$E=F(u) \subset K(u)  \subset E$，得到$E=K(u)$，于是$[K(u):K]=n$
-
-那么 $u$ 在 $K$ 上的极小多项式就是 $K[x]$ 中的 $n$ 次不可约多项式.
-
-\iffalse 
-因为存在 $p^{n^2}$ 元域 $E$ 使得 $E$ 是 $x^{p^{n^2}}-x \in K[x]$ 在 $F_{p}$ 上的分裂域, 且 $E=K(u)$ 
-
-那么 $u$ 在 $K$ 上的极小多项式就是 $K[x]$ 中的 $n$ 次不可约多项式.
-\fi
-\end{homeworkProblem}
-\pagebreak
-
-\begin{homeworkProblem}
-8. (1) 证明 $x^{4}+x+1$ 为 $F_{2}[x]$ 中本原多项式
-
-(2) 列出 16 元域 $F_{16}=F_{2}[u]$ 中(唯一的) 4 元子域的全部元素,这里 $u$ 是
-$x^{4}+x+1 \in F_{2}[x]$ 的一个根
-
-(3) 求出 $u$ 在$F_{4}$ 上的极小多项式.
-    \par   \noindent   \textbf{Solution}\\
-\indent
-(1)设$u$是它的一个根，那么
-
-$
-\begin{aligned}
-&u=u\\
-&u^2=u^2\\
-&u^3=u^3\\
-&u^4=u+1\\
-&u^5=u^2+u\\
-&u^6=u^3+u^2\\
-&u^7=u^3+u+1\\
-&u^8=u^2+1\\
-&u^9=u^3+u\\
-&u^{10}=u^2+u+1\\
-&u^{11}=u^3+u^{2}+u\\
-&u^{12}=u^3+u^{2}+u+1\\
-&u^{13}=u^3+u^2+1\\
-&u^{14}=u^3+1\\
-&u^{15}=1
-\end{aligned}
-$
-
-因此，按照本原多项式的定义可知$x^{4}+x+1$ 为 $F_{2}[x]$ 中本原多项式.
-
-(2)
-$F_{16}=F_{2}[u]$ 中(唯一的) 4 元子域的全部元素是
-
-$F_4=\{0,1,u^5,u^{10}\}=\{0,1,u^2+u,u^2+u+1\}$
-
-(3)
-该极小多项式至少是二次的.
-
-根据上述的关系式可以发现$u$满足$x^2+x+u^5=0$，
-
-所以这是$u$ 在$F_{4}$ 上的极小多项式.
-\end{homeworkProblem}
-\pagebreak
 \end{document}
