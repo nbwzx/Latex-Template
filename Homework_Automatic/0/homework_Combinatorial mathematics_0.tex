@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\def\filedate{2021/2/24}
+\def\filedate{2021/2/25}
 \def\updatewebsite{https://github.com/nbwzx/Latex-Template}
 \usepackage{geometry}  %Set the size of each part of the page
 \usepackage{fancyhdr}  %Set header, margin and footer
@@ -178,13 +178,39 @@
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
 \newcommand{\dx}{\mathrm{d}x}
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
-\newcommand{\pic}[2]{
+
+\makeatletter
+\def\pic{%
+        \@ifnextchar[{\picone}{\piczero}%
+        }
+\def\picone[#1]{%
+            \@ifnextchar[{\piconeone[#1]}{\piconezero[#1]}%
+            }
+\def\piconeone[#1][#2]#3#4{
+\FloatBarrier
+\begin{figure}[htb] 
+\center{\includegraphics[width=#4]  {#3}} 
+\caption{#1}
+\label{#2}
+\end{figure}
+\FloatBarrier
+}
+\def\piconezero[#1]#2#3{
+\FloatBarrier
+\begin{figure}[htb] 
+\center{\includegraphics[width=#3]  {#2}} 
+\caption{#1}
+\end{figure}
+\FloatBarrier
+}
+\def\piczero #1#2{
 \FloatBarrier
 \begin{figure}[htb] 
 \center{\includegraphics[width=#2]  {#1}} 
 \end{figure}
 \FloatBarrier
 }
+\makeatother 
 
 \begin{document}
 \lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
@@ -240,16 +266,15 @@ for  (i in 1:72) {
 death.month[i]<-death.avg[(i-1)%%12+1]
 }
 \end{lstlisting}
-
-\pic{fig1.png}{10cm}
-
-%\lstinputlisting[language=Python]{D:/python/program/active.py}
+\pic[Abstract Algebra][fig1]{fig1.png}{10cm}
+%pic[caption(optional)][label(optional)]{file path and file name}{width}
 
 对于房价的预测而言，url, id, Cid, DOM, followers是没有用的信息。对上述量进行删除处理。
 \lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
 \begin{lstlisting}[language=python]
 df = df.drop(['url', 'id', 'Cid', 'DOM', 'followers'], axis = 1)
 \end{lstlisting}
+%\lstinputlisting[language=Python]{D:/python/program/active.py}
 \end{homeworkProblem}
 \pagebreak
   
