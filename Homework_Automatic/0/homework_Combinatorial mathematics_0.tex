@@ -24,7 +24,8 @@
 \usepackage{listings}
 \usepackage{url}
 \usepackage{xstring}
-
+\usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black, ]{hyperref}
+\usepackage{xparse}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
 \newtheorem{remark}{Remark}
@@ -180,30 +181,24 @@
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
 \makeatletter
-\def\pic{%
-        \@ifnextchar[{\picone}{\piczero}%
-        }
-\def\picone[#1]{%
-            \@ifnextchar[{\piconeone[#1]}{\piconezero[#1]}%
-            }
-\def\piconeone[#1][#2]#3#4{
+\def\picfour#1#2#3#4{
 \FloatBarrier
 \begin{figure}[htb] 
-\center{\includegraphics[width=#4]  {#3}} 
-\caption{#1}
-\label{#2}
+\center{\includegraphics[width=#2]  {#1}} 
+\caption{#3}
+\label{#4}
 \end{figure}
 \FloatBarrier
 }
-\def\piconezero[#1]#2#3{
+\def\picthree#1#2#3{
 \FloatBarrier
 \begin{figure}[htb] 
-\center{\includegraphics[width=#3]  {#2}} 
-\caption{#1}
+\center{\includegraphics[width=#2]  {#1}} 
+\caption{#3}
 \end{figure}
 \FloatBarrier
 }
-\def\piczero #1#2{
+\def\pictwo#1#2{
 \FloatBarrier
 \begin{figure}[htb] 
 \center{\includegraphics[width=#2]  {#1}} 
@@ -211,6 +206,24 @@
 \FloatBarrier
 }
 \makeatother 
+\NewDocumentCommand{\pic}{mmgg}{
+\IfDecimal{#2}{%
+    {\IfNoValueTF{#4}
+    {\IfNoValueTF{#3}
+    {\pictwo{#1}{#2\textwidth}}
+    {\picthree{#1}{#2\textwidth}{#3}}
+    }
+    {\picfour{#1}{#2\textwidth}{#3}{#4}}}
+    }{%
+     {\IfNoValueTF{#4}
+    {\IfNoValueTF{#3}
+    {\pictwo{#1}{#2}}
+    {\picthree{#1}{#2}{#3}}
+    }
+    {\picfour{#1}{#2}{#3}{#4}}}
+    }%
+}
+
 
 \begin{document}
 \lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
@@ -266,14 +279,15 @@ for  (i in 1:72) {
 death.month[i]<-death.avg[(i-1)%%12+1]
 }
 \end{lstlisting}
-\pic[Abstract Algebra][fig1]{fig1.png}{10cm}
-%pic[caption(optional)][label(optional)]{file path and file name}{width}
+\pic{fig1.png}{0.8}{Abstract algebra}{fig1}
+%pic{file path and file name}{width(xcm or x( means x\textwidth)}{caption(optional)}{label(optional)}
 
 对于房价的预测而言，url, id, Cid, DOM, followers是没有用的信息。对上述量进行删除处理。
 \lstset{numbers=left, xleftmargin=1.5em,xrightmargin=0.5em, aboveskip=0.5em}
 \begin{lstlisting}[language=python]
 df = df.drop(['url', 'id', 'Cid', 'DOM', 'followers'], axis = 1)
 \end{lstlisting}
+
 %\lstinputlisting[language=Python]{D:/python/program/active.py}
 \end{homeworkProblem}
 \pagebreak
