@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\def\filedate{2021/2/25}
+\def\filedate{2021/3/19}
 \def\updatewebsite{https://github.com/nbwzx/Latex-Template}
 \usepackage{geometry}  %Set the size of each part of the page
 \usepackage{fancyhdr}  %Set header, margin and footer
@@ -26,6 +26,7 @@
 \usepackage{xstring}
 \usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black, ]{hyperref}
 \usepackage{xparse}
+\usetikzlibrary{positioning, fit, calc, intersections, through, shapes, arrows, scopes, automata, decorations.markings}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
 \newtheorem{remark}{Remark}
@@ -168,6 +169,7 @@
 
 % Alias for the Solution section header
 \newcommand{\solution}{\par   \noindent   \textbf{Solution}\\ \indent}
+\newcommand{\Solution}{\par   \noindent   \textbf{Solution}}
 
 % Probability commands: Expectation, Variance, Covariance, Bias and so on.
 \newcommand{\E}{\mathrm{E}}
