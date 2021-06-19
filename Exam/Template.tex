@@ -1,0 +1,136 @@
+\documentclass{ctexart}[10pt,a4paper]
+\usepackage{CJK}
+\usepackage{ctex}
+\usepackage{geometry}
+\geometry{a4paper,left=2cm,right=2cm,top=3cm,bottom=3cm}
+\usepackage{fancyhdr}
+\usepackage{pifont}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{ulem}
+\usepackage{amsmath,amssymb}
+
+\usepackage{float}
+
+\newfloat{figtab}{htb}{fgtb}
+\makeatletter
+  \newcommand\figcaption{\def\@captype{figure}\caption}
+  \newcommand\tabcaption{\def\@captype{table}\caption}
+\makeatother
+
+\pagestyle{plain}
+\newcommand{\xz}{\nolinebreak\dotfill\mbox{\raisebox{-1.8pt}
+		{$\cdots$}(\hspace{1cm})}}
+
+\usepackage{ifthen}
+\newlength{\la}
+\newlength{\lb}
+\newlength{\lc}
+\newlength{\ld}
+\newlength{\lhalf}
+\newlength{\lquarter}
+\newlength{\lmax}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
+\newcommand{\dt}{\mathrm{d}t}
+\newcommand{\dxi}{\mathrm{d}\xi}
+\newcommand{\dth}{\mathrm{d}\theta}
+\newcommand{\mH}{\mathcal{H}}
+\newcommand{\Ree}{\mathrm{Re}}
+\newcommand{\intrn}{\int_{\RR^n}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\intpi}{\int_{-\pi}^{\pi}}
+\newcommand{\intall}{\int_{-\infty}^{+\infty}}
+\newcommand{\sumall}{\sum_{n=-\infty}^{\infty}}
+\newcommand{\exi}{e^{2\pi i \xi x}}
+\newcommand{\exii}{e^{-2\pi i \xi x}}
+\newcommand{\xx}[4]{
+	\settowidth{\la}{A.~#1~~~}
+	\settowidth{\lb}{B.~#2~~~}
+	\settowidth{\lc}{C.~#3~~~}
+	\settowidth{\ld}{D.~#4~~~}
+	\ifthenelse{\lengthtest{\la > \lb}}  {\setlength{\lmax}{\la}}  {\setlength{\lmax}{\lb}}
+	\ifthenelse{\lengthtest{\lmax < \lc}}  {\setlength{\lmax}{\lc}}  {}
+	\ifthenelse{\lengthtest{\lmax < \ld}}  {\setlength{\lmax}{\ld}}  {}
+	\setlength{\lhalf}{0.5\linewidth}
+	\setlength{\lquarter}{0.25\linewidth}
+	\ifthenelse{\lengthtest{\lmax > 0.5\linewidth}}  {\noindent{}A.~#1\\B.~#2\\C.~#3\\D.~#4 }  {
+		\ifthenelse{\lengthtest{\lmax > \lquarter}}  {\noindent\makebox[\lhalf][l]{A.~#1~~~}%
+			\makebox[\lhalf][l]{B.~#2~~~}%
+			\\
+			\makebox[\lhalf][l]{C.~#3~~~}%
+			\makebox[\lhalf][l]{D.~#4~~~}}%
+		{\noindent\makebox[\lquarter][l]{A.~#1~~~}%
+			\makebox[\lquarter][l]{B.~#2~~~}%
+			\makebox[\lquarter][l]{C.~#3~~~}%
+			\makebox[\lquarter][l]{D.~#4~~~}}}}
+		
+		\newcommand{\tk}[1][2.5]{\,\underline{\mbox{\hspace{#1 cm}}}\,}
+
+
+\begin{document}
+\linespread{1.5}
+
+	\begin{center}
+		\huge \textbf{上\ \ 海\ \ 交\ \ 通\ \ 大\ \ 学 \ \ 试\ \ 卷	}
+	\end{center}
+	\begin{center}
+		\large（2020 至 2021 学年\ \ 第  \uline{ 2 } 学期期末考试
+）
+	\end{center}
+\large{班级：\underline{\hbox to 40mm{}}}
+\large{学号：\underline{\hbox to 40mm{}}}
+\large{姓名：\underline{\hbox to 40mm{}}}\\
+\large{课程名称：\underline{\hbox to 30mm{}课程名称\hbox to 39mm{}}}
+\large{成绩：\underline{\hbox to 40mm{}}}
+
+\vspace{15pt}
+
+
+\begin{enumerate}
+\item 以下成立的有:\\
+	\xx
+	{选项1.}
+	{选项2.}
+	{选项3.}
+	{选项4.}
+
+\vspace{80mm}
+
+\item[\textbf{二}](10分)、题目内容
+
+\pagebreak
+
+\begin{figtab}
+  \begin{minipage}[c]{0.2\linewidth}
+    \textbf{\large 我承诺，我将严格遵守考试纪律。}
+    \\
+    
+    \textbf{\large 承诺人：$\underline{\hbox to 18mm{}}$}
+  \end{minipage}\quad\quad\quad
+  \begin{minipage}[c]{0.6\linewidth}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline 题号 &\ 一 \ \ &\  二 \ \ &\  三 \ \  &\  四 \ \ &\  五 \ \ &\  六 \ \ &\  七 \ \ &\  八 \ \ &\  九 \ \ &\  十 \ \  \\
+	\hline 得分 & & & & & & & & & & \\
+	\hline 批阅人 & & & & & & & & & & \\
+	(流水阅) & & & & & & & & & & \\
+	\hline
+	\end{tabular}
+  \end{minipage}
+\end{figtab}
+
+\item[\textbf{三}](10分) 、题目内容
+
+\vspace{80mm}
+
+
+\item[\textbf{四}](10分)、题目内容
+
+\pagebreak
+
+
+\end{enumerate}
+\end{document}
